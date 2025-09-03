@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Números Naturales - Número Faltante</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(10, 40px); gap: 5px; margin-top: 20px; }
+        .number { padding: 10px; text-align: center; border: 1px solid #ccc; }
+        .missing { background-color: yellow; font-weight: bold; }
+        input[type=number] { width: 60px; }
+        button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Números Naturales del 1 al 100</h1>
+
+    <form method="POST">
+        <label>Ingrese número faltante (1-100):</label>
+        <input type="number" name="manual_input" min="1" max="100">
+        <button type="submit" name="manual">Extraer Manual</button>
+        <button type="submit" name="random">Extraer Aleatorio</button>
+    </form>
+
+    {% if message %}
+        <p><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <div class="grid">
+        {% for n in grid %}
+            {% if '[' in n %}
+                <div class="number missing">{{ n|replace('[','')|replace(']','') }}</div>
+            {% else %}
+                <div class="number">{{ n }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
